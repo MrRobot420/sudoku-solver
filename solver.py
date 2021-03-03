@@ -32,18 +32,37 @@ sudoku = [["5", "3", ".", ".", "7", ".", ".", ".", "."], ["6", ".", ".", "1", "9
 # - make it work
 # - build graphical interface that shows the process. / the endresult
 
-def solveSudoku(sudoku):
+def solveSudoku():
+    global sudoku
+    for y in range(9):
+        for x in range(9):
+            if sudoku[y][x] == '.':
+                for testNumber in range(1, 10):
+                    if possibleNumber(y, x, str(testNumber)):
+                        sudoku[y][x] = str(testNumber)
+                        solveSudoku()
+                        sudoku[y][x] = '.'
+                return 
+    
     printSoduko(sudoku)
-    pass
 
-def checkForSameNumberInSquare(position):
-    pass
+def possibleNumber(y, x, numberToTest):
+    global sudoku
+    for i in range(0, 9):
+        if sudoku[y][i] == numberToTest:
+            return False
+    for i in range(0, 9):
+        if sudoku[i][x] == numberToTest:
+            return False
 
-def checkForSameNumberInRow(position):
-    pass
-
-def checkForSameNumberInColumn(position):
-    pass
+    x0 = (x//3) * 3
+    y0 = (y//3) * 3
+    for i in range(0, 3):
+        for j in range(0, 3):
+            if sudoku[y0+i][x0+j] == numberToTest:
+                return False
+    
+    return True
 
 def printSoduko(sudoku):
     printHeader()
@@ -66,4 +85,10 @@ def printHeader():
     print('\t   SUDOKU: ')
     print()
 
-solveSudoku(sudoku)
+
+printSoduko(sudoku)
+result = solveSudoku()
+
+print('RESULT: ')
+print(result)
+printSoduko(result)
