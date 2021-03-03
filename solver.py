@@ -32,7 +32,8 @@ sudoku = [["5", "3", ".", ".", "7", ".", ".", ".", "."], ["6", ".", ".", "1", "9
 # - make it work
 # - build graphical interface that shows the process. / the endresult
 
-def solveSudoku():
+def solveSudoku(sudoku):
+    printSoduko(sudoku)
     pass
 
 def checkForSameNumberInSquare(position):
@@ -43,3 +44,49 @@ def checkForSameNumberInRow(position):
 
 def checkForSameNumberInColumn(position):
     pass
+
+def printSoduko(sudoku):
+    print()
+    print('\t   SUDOKU: ')
+    print()
+    print('  ', '-' *23)
+    for index in range(9):
+        string = ''
+        for inner_index in range(9):
+            if inner_index == 0:
+                string += f'{index + 1} | {sudoku[index][inner_index]} '
+            elif ((inner_index+1) % 3) == 0 and inner_index != 0:
+                string += f'{sudoku[index][inner_index]} | '
+            else: 
+                string += f'{sudoku[index][inner_index]} '
+        
+        print(string)
+        if ((index+1) % 3) == 0 and index != 0:
+            print('   ' + '-' *23)
+
+
+    # for (index, row) in enumerate(sudoku):
+    #     for (inner_index, number) in enumerate(row):
+    #         if (inner_index % 2) == 0:
+    #             print('\r', number + '|')
+    #         else:
+    #             print('\r', number)
+            
+    #     if (index % 2) == 0 and index != 0:
+    #         print('-' *46)
+
+    # print('1', sudoku[0])
+    # print('2', sudoku[1])
+    # print('3', sudoku[2])
+   
+    # print('4', sudoku[4])
+    # print('5', sudoku[3])
+    # print('6', sudoku[5])
+    # print('-' *46)
+    # print('7', sudoku[6])
+    # print('8', sudoku[7])
+    # print('9', sudoku[8])
+    pass
+
+
+solveSudoku(sudoku)
